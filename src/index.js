@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import ReactDOM from "react-dom";
 import Button from "./components/button.jsx";
+import Text from "./components/text.jsx";
+import HideReveal from "./components/hide-reveale.jsx";
 
 class Content extends Component {
   constructor(props) {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
+    this.handleHideText = this.handleHideText.bind(this);
+    this.handleRevealText = this.handleRevealText.bind(this);
 
     this.state = {
       counter: 0
@@ -22,8 +26,25 @@ class Content extends Component {
     );
   }
 
+  handleHideText() {
+    $("#text").fadeOut("slow");
+  }
+
+  handleRevealText() {
+    $("#text").fadeIn("slow");
+  }
+
   render() {
-    return <Button handler={this.handleClick} counter={this.state.counter} />;
+    return (
+      <React.Fragment>
+        <Button handler={this.handleClick} />
+        <Text counter={this.state.counter} />
+        <HideReveal
+          handleHide={this.handleHideText}
+          handleReveal={this.handleRevealText}
+        />
+      </React.Fragment>
+    );
   }
 }
 
